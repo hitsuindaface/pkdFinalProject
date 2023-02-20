@@ -12,6 +12,6 @@ wss.on('connection', (ws) => {
     })
     
     ws.send(`Hello, this is server.ts!`);
-})
+});
 
 console.log(`Listening at ${port}...`); // Notifies user of server activity at port
