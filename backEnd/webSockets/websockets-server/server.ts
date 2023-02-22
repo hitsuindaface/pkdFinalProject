@@ -13,9 +13,9 @@ wss.on('connection', (ws) => {
         //     ws.send(`${winner} is winner`)
         //     ws.close()
         // }
-    })
-    
-    ws.send(`Hello, this is server.ts!`);
+    });
+
+    ws.send('Server initialized successfully');
 });
 
 // let counterA = 0;
@@ -25,7 +25,7 @@ wss.on('connection', (ws) => {
 // }
 // if ('answer B is correct') {
 //     counterB += 1
-// }
+// }    
 // wss.on('message', (data) => {
     
 // };)

@@ -14,5 +14,12 @@ export const Questions: Question[] = [
                                 {question: "What is 1+2?", answer: "3", alternatives: ["3", "4", "1", "2"]}];
 
 
-
+/******************** User Types ***********************/
+export type User = {
+    name: string,
+    pfp?: string,
+    password: string,
+    lastAns: string, // Saves last answer input by user
+    points: number
+}
 
