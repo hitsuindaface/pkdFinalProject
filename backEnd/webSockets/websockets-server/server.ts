@@ -3,6 +3,7 @@ import { WebSocketServer } from "ws";
 
 const port = 1234; // Will be changed
 const wss = new WebSocketServer({port}); // wss = WebSocketServer
+wss.clients
 
 wss.on('connection', (ws) => {
     // Handles new connections
@@ -13,10 +14,22 @@ wss.on('connection', (ws) => {
         //     ws.send(`${winner} is winner`)
         //     ws.close()
         // }
+        console.log(wss.clients);
     });
 
     ws.send('Server initialized successfully');
 });
+
+
+// Server TODO: 
+/**
+ * Send and hold questions
+ * Take and hold user score
+ * [[user: User, score: number], [user: User, score: number]];
+ */
+
+
+
 
 // let counterA = 0;
 // let counterB = 0;

@@ -23,3 +23,8 @@ export type User = {
     points: number
 }
 
+export type scoreLine = {
+    user1: number
+    user2: number
+    winner: User
+}

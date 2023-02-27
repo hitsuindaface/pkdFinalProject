@@ -1,4 +1,4 @@
-import { User, Question } from "./BaseGame/QuestionStructure";
+import { User, Question, scoreLine } from "./BaseGame/QuestionStructure";
 
 
 /**
@@ -32,10 +32,16 @@ export function gameEnd(): boolean | number {
  * @returns - winning user OR adds golden round to game
  */
 
-export function isWinner(user1: User, user2: User): User | number {
-    return  user1.points > user2.points
-            ? user1
-            : user1.points === user2.points
-                ? round += 1 // if the score is even, add a golden goal round
-                : user2
+export function isWinner(userA: User, userB: User): scoreLine {
+    function winner(a: User, b: User): User {
+        return  a.points >= b.points  
+                ? a
+                : b
+    }
+    let finalScore: scoreLine = {
+                                user1: userA.points,
+                                user2: userB.points,
+                                winner: winner(userA, userB)
+                                }
+    return finalScore;
 }
