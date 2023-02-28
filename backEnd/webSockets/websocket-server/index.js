@@ -44,6 +44,7 @@ app.ws('/ws', async function(ws, req) { // app.ws refers to the websocket and th
         // if a message occurs, we'll console log it on the server
         console.log(msg);
         // send back some data
+        ws.send(msg);
         let sendData = 0;
         sockets[1].on('message', (u1) => {
             if (u1.JSON.tag === gameEnded) {

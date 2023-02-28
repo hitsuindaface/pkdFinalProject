@@ -1,4 +1,4 @@
-
+import { Questions } from '../../../frontEnd/PKDgame/src/routes/questionLib'
 // @connect
 // Connect to the websocket
 let socket;
@@ -20,6 +20,22 @@ const connect = () => {
             // resolve the problem - we are connected
             resolve();
         }
+        socket.onmessage = (data) => {
+            console.log(data);
+            let parsedData = JSON.parse(data.data);
+            if (parsedData.append === true) {
+                const newEl = document.createElement('p');
+                newEl.textContent = parsedData.returnText;
+                document.getElementById('websocket-returns').appendChild(newEl);
+            }
+        }
+        socket.onerror = (e) => {
+            // Return an error if any occurs
+            console.log(e);
+            resolve();
+            // Try to connect again
+            connect();
+        }
     });
 }
 
@@ -34,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // connect to the websocket
     connect();
     // add  our event listeners
-    document.getElemenyByID('websocket-button').addEventListener('click', (e) => { 
+    document.getElemenyByID('startbutton').addEventListener('click', (e) => { 
         // listens for clicks on our button in index.html
         if(isOpen(socket)) {
             socket.send(JSON.stringify({
-                'tag' : 'qAns',
-                'arrLen': 'current arr len'
+                'tag' : 'qLen',
+                'arrLen': Questions.length
             }))
             socket.on('message', (data) => {
                 if (data.JSON.tag === 'lstq') {
