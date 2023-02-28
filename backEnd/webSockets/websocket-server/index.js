@@ -1,6 +1,6 @@
 // imports path and url dependencies
 import path from 'path';
-import { fileURLToPath} from 'url';
+import { fileURLToPath } from 'url';
 
 // get the directory and file path
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
 const sockets = {};
 let UID = 0;
 
+// import helper function for randomizing array of length n
+// import { randomizeArr } from '../function.js';
+
 // This lets the server pick up the '/ws' webSocket route
 app.ws('/ws', async function(ws, req) { // app.ws refers to the websocket and that's what we try to connect to on the frontend. 
     // after which we wait for a message and respond to it
@@ -40,29 +43,33 @@ app.ws('/ws', async function(ws, req) { // app.ws refers to the websocket and th
     });
     let u1score = 0;
     let u2score = 0;
-    ws.on('message', async function(msg) {
-        // if a message occurs, we'll console log it on the server
-        console.log(msg);
-        // send back some data
-        ws.send(msg);
-        let sendData = 0;
-        sockets[1].on('message', (u1) => {
-            if (u1.JSON.tag === gameEnded) {
-                u1score = u1.JSON.score;
-                sendData++ // adds 1 to sendData
-            }; 
-        })
-        sockets[2].on('message',(u2) => {
-            if (u2.JSON.tag === gameEnded) {
-                u2score = u2.JSON.score;
-                sendData++ 
-            }
-        }) 
-        if (sendData === 2) {
-            ws.send(JSON.stringify({
-                'user1': u1score,
-                'user2': u2score
-            }));
+    let sendData = 0;
+    sockets[1].on('message', (u1) => {
+        if (u1.JSON.tag === 'eventGameOver') {
+            u1score = u1.JSON.finalPoint;
+            sendData++ // adds 1 to sendData
+        }; 
+    })
+    sockets[2].on('message',(u2) => {
+        if (u2.JSON.tag === 'eventGameOver') {
+            u2score = u2.JSON.finalPoint;
+            sendData++ 
         }
-    });
-})
+    }) 
+    if (sendData === 2) {
+        ws.send(JSON.stringify({
+            'user1': u1score,
+            'user2': u2score
+        }));
+    }
+    /*
+    ws.on('message', (data) => {
+        if (data.JSON.tag === 'qLen'){
+            arr = randomizeArr(data.JSON.arrLen)
+            ws.send(JSON.stringify({
+                'tag': 'qLen',
+                'len': arr
+            }))
+        }
+    }) */
+});

@@ -3,7 +3,7 @@
     import {next_question, ranomize_alternatives} from "./gameFunction";
 	import { element } from "svelte/internal";
     export let showModal = false;
-    const endGame = require("./endGame.json")
+    const endGame = require("../routes/endGame.json")
 
     let totalScore = 0;
     let currentScore = 100;
@@ -24,7 +24,8 @@
             questionsAnswered++;
 
             if( questionsAnswered === 7) {
-                endGame.game_over = true;
+                endGame.final_points = currentScore;
+                endGame.gameOver = true;
             } else {}
             /* if(used_questions.length !== Questions.length){
                 

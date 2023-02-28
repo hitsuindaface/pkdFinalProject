@@ -1,4 +1,5 @@
 {
     "tag": "eventEndGame",
-    "game_over": false
+    "gameOver": false,
+    "final_points": null
 }
