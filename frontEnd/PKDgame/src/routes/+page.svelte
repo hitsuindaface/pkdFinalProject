@@ -21,7 +21,7 @@ function toggleLeaderB(){
 <Quiz {showModal} on:click = {toggleModal}/>
 <main>
 	<p>Welcome to quizzi!</p>
-	<div><button class = "button:hover" on:click={toggleModal}>Start</button></div>
+	<div><button id="startbutton" class = "button:hover" on:click={toggleModal}>Start</button></div>
 	<button on:click={toggleLeaderB}>Leader board</button>
 	
 	

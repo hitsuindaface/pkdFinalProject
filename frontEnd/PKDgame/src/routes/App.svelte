@@ -1,10 +1,8 @@
 <script lang="ts">
-
 	import Quiz from './quiz.svelte';
 	let showModal = false;
 	let is_right = false;
 	let showLeaderB = false;
-	
 
 /* function handleClick(question, response){
 	is_right = !is_right;

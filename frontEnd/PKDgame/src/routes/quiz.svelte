@@ -1,10 +1,13 @@
 <script lang="ts">
     import {type Question, Questions} from "./questionLib";
     import {next_question, ranomize_alternatives} from "./gameFunction";
+	import { element } from "svelte/internal";
     export let showModal = false;
+    const endGame = require("./endGame.json")
 
     let totalScore = 0;
     let currentScore = 100;
+    let questionsAnswered = 0;
     let game_over = false;
     let used_questions: Question[] = [];
     let current: Question = next_question(Questions, used_questions);
@@ -18,11 +21,16 @@
         if (is_right){
             totalScore = totalScore + currentScore;
             currentScore = 100;
-            if(used_questions.length !== Questions.length){
+            questionsAnswered++;
+
+            if( questionsAnswered === 7) {
+                endGame.game_over = true;
+            } else {}
+            /* if(used_questions.length !== Questions.length){
                 
-               /*  if(used_questions.length === Questions.length) {
+                if(used_questions.length === Questions.length) {
                     used_questions = [];
-                }  */
+                }  
                 used_questions.push(current);
                 current = next_question(Questions, used_questions);
 
@@ -30,7 +38,7 @@
                 used_questions = [];
                 game_over = true;
                 
-            }    
+            }*/
         } else {
             currentScore = currentScore - 25;
         }   

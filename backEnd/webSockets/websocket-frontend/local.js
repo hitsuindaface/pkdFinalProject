@@ -1,4 +1,5 @@
 import { Questions } from '../../../frontEnd/PKDgame/src/routes/questionLib'
+const gameOverJSON = require("../../../frontEnd/PKDgame/src/routes/endGame.json")
 // @connect
 // Connect to the websocket
 let socket;
@@ -67,3 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 })
+
+while (!gameOverJSON.game_over) {
+    socket.send(JSON.stringify({
+        'tag': 'eventGameOver',
+        'gameOver': true
+    }))
+}
