@@ -1,9 +1,10 @@
 <script lang="ts">
+    import { endGame } from "./endGame";
     import {type Question, Questions} from "./questionLib";
     import {next_question, ranomize_alternatives} from "./gameFunction";
 	import { element } from "svelte/internal";
     export let showModal = false;
-    const endGame = require("./endGame.json")
+    
 
     let totalScore = 0;
     let currentScore = 100;
