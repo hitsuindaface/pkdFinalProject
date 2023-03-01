@@ -1,0 +1,7 @@
+{
+  "name": "local.js",
+  "type": "commonjs",
+  "dependencies": {
+    "jsdom": "^21.1.0"
+  }
+}
